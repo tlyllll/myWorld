@@ -17,19 +17,19 @@
         const menuItems: Array<MenuProps> = [
         {
           name:'Home',
-          path:'/'
+          path:'Index'
         },
         {
           name:'Online Shop',
-          path:'/'
+          path:'Index'
         },
         {
           name:'Community',
-          path:'/'
+          path:'Index'
         },
         {
           name: 'About us',
-          path:'/'
+          path:'Index'
         }
       ]
       return {
