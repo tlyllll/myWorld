@@ -20,7 +20,7 @@
           path:'Index'
         },
         {
-          name:'Online Shop',
+          name:'Note',
           path:'Index'
         },
         {
@@ -28,7 +28,7 @@
           path:'Index'
         },
         {
-          name: 'About us',
+          name: 'About me',
           path:'Index'
         }
       ]

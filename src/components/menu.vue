@@ -73,9 +73,10 @@ export default defineComponent({
 .item-content {
     display: flex;
     position: relative;
+    margin-right: 3rem;
 }
 .item {
-    margin-right: 3em;
+    padding: 0 1.5em;
     font-weight: 500;
     display: block;
     position: relative;
@@ -158,6 +159,9 @@ export default defineComponent({
     }
     .item:hover::before {
         width: 0;
+    }
+    .item:hover {
+        font-weight: 700;
     }
 }
 </style>

@@ -1,9 +1,17 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-const service = axios.create();
+const service = axios.create({
+    baseURL: "",// 基准地址
+    timeout: 5000 // 超时时间
+});
 // Request interceptors
+//请求拦截器
 service.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
         // do something
+        let token:string|null = localStorage.getItem('token')
+        if (token) {
+            config.headers.token = token
+        }
         return config;
     },
     (error: any) => {
@@ -11,6 +19,7 @@ service.interceptors.request.use(
     }
 );
 // Response interceptors
+// 响应拦截器
 service.interceptors.response.use(
     async (response: AxiosResponse<any, any>) => {
         // do something
