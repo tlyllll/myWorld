@@ -1,8 +1,44 @@
 <template>
+  <Menu :menuItems="menuItems"/>
+
   <RouterView/>
 </template>
 <script lang="ts">
-export default {};
+import Menu from '@/components/menu.vue';
+import { defineComponent } from 'vue';
+interface MenuProps {
+    name: string,
+    path: string
+}
+export default defineComponent({
+  components: {
+    Menu
+  },
+  setup() {
+      const baseImgUrl = '/src/assets/img/'
+      const menuItems: Array<MenuProps> = [
+        {
+          name:'Home',
+          path:'Index'
+        },
+        {
+          name:'Note',
+          path:'Index'
+        },
+        {
+          name:'Community',
+          path:'Index'
+        },
+        {
+          name: 'About me',
+          path:'Index'
+        }
+      ]
+      return {
+        menuItems,
+      }
+    }
+});
 </script>
 <style scoped>
 #app {

@@ -1,7 +1,12 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 const service = axios.create({
-    baseURL: "",// 基准地址
-    timeout: 5000 // 超时时间
+    baseURL: "http://localhost:3000",// 基准地址
+    timeout: 5000, // 超时时间
+    withCredentials: true,
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': 'http://localhost:3000'
+    }
 });
 // Request interceptors
 //请求拦截器

@@ -1,5 +1,4 @@
 <template>
-  <Menu :menuItems="menuItems"/>
   <div>
     <Carousel 
     style="margin-top: 16vh;" 
@@ -10,41 +9,18 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import Menu from '@/components/menu.vue';
 import Carousel from "@/components/carousel.vue";
-interface MenuProps {
-    name: string,
-    path: string
-}
+
 interface Img {
     imgUrl: string,
     toPath: string
 }
 export default defineComponent({
   components: {
-    Menu,
     Carousel
   },
     setup() {
       const baseImgUrl = '/src/assets/img/'
-      const menuItems: Array<MenuProps> = [
-        {
-          name:'Home',
-          path:'Index'
-        },
-        {
-          name:'Note',
-          path:'Index'
-        },
-        {
-          name:'Community',
-          path:'Index'
-        },
-        {
-          name: 'About me',
-          path:'Index'
-        }
-      ]
       const imgList: Array<Img> = [
         {
           imgUrl: baseImgUrl+'0652.jpg',
@@ -70,7 +46,6 @@ export default defineComponent({
       const autoplay = true
       const duration = 3000
       return {
-        menuItems,
         imgList,
         autoplay,
         duration
@@ -79,5 +54,6 @@ export default defineComponent({
   })
 </script>
 <style scoped>
+
 </style>
   
