@@ -28,10 +28,6 @@ export default defineComponent({
         {
           name:'Community',
           path:'Index'
-        },
-        {
-          name: 'About me',
-          path:'Index'
         }
       ]
       return {

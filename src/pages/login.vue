@@ -3,8 +3,8 @@
         <span class="status"> {{ status }} </span>
         <div class="item" v-if="status === 'LOGIN'">
             <div>E-mail / phone-number</div>
-            <input v-model="userInfo.password"/>
-            <span class="wrong-msg">请输入正确账号！</span>
+            <input v-model="username"/>
+            <span v-show="!legalUsername" class="wrong-msg">请输入正确账号！</span>
         </div>
         <div class="item">
             <div>Password</div>
@@ -24,15 +24,15 @@
         </div>
         <div class="item">
             <div>Phone-number</div>
-            <input v-model="userInfo.phoneNumber"/>
+            <input v-model="userInfo.phone"/>
             <span v-show="!legalPhone" class="wrong-msg">请输入正确手机号码！</span>
         </div>
         
         <div class="item">
             <div>NickName</div>
-            <input v-model="userInfo.nickName"/>
+            <input v-model="userInfo.nickname"/>
             <span 
-            v-show="userInfo.nickName.length>=20 || userInfo.nickName.length==0" 
+            v-show="userInfo.nickname.length>=20 || userInfo.nickname.length==0" 
             class="wrong-msg">长度须在2-20字符之间！</span>
         </div>
         <div class="item">
@@ -40,7 +40,7 @@
             <input type="date" v-model="userInfo.birth"/>
         </div>
         </div> 
-        <div class="btn" v-show="status === 'LOGIN'">SIGN IN</div>
+        <div @click="login" class="btn">SIGN IN</div>
         <div @click="signUp" style="margin-bottom: 50px;" class="btn">SIGN UP</div>
     </div>
     <div class="bottom"></div>
@@ -48,53 +48,96 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref,inject } from 'vue'
 import request from '@/utils/api'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/store/user'
+import router from '@/router'
+import Cookies from 'js-cookie'
+import md5 from 'js-md5'
 interface User {
-    phoneNumber: string,
+    phone: string,
     password: string,
     nickName:string,
     email: string,
     birth: Date
 }
 export default defineComponent({
-    props: {
-        status: String,
-    },
     setup (props) {
-        let status = props.status || 'Sign up' 
+        const reload:any = inject('reload')
+        let status = ref('LOGIN')
+        const username = ref('')
         const rePassword = ref('')
         const userInfo = ref({
-            phoneNumber: '',
+            phone: '',
             password: '',
-            nickName:'',
+            nickname:'',
             email: '',
             birth: new Date().toLocaleDateString()
         })
-
+        
         const showRePW = computed(()=>userInfo.value.password!==rePassword.value)
         const legalPW = computed(()=>
         /^(?=.*([a-z]|[A-Z]))(?=.*\d)[a-zA-Z\d]{6,20}$/.test(userInfo.value.password))
         const legalEM = computed(()=>
         /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(userInfo.value.email))
         const legalPhone = computed(()=>
-        /^(13[0-9]|14[5|7]|15[0-9]|18[0-9])\d{8}$/.test(userInfo.value.phoneNumber))
+        /^(13[0-9]|14[5|7]|15[0-9]|18[0-9])\d{8}$/.test(userInfo.value.phone))
+        const legalUsername = computed(()=>
+        /^(13[0-9]|14[5|7]|15[0-9]|18[0-9])\d{8}$/.test(username.value) || 
+        /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(username.value))
+        async function signUp() {
+            if(status.value == 'LOGIN') {
+                status.value = 'Sign up'
+                return
+            }
+            if(!legalEM || !legalPhone || !legalPW|| showRePW.value || userInfo.value.nickname.length==0) {
+                console.log('wrong')
+                return
+            }
+            const postInfo = {
+                phone: userInfo.value.phone,
+                password: md5(userInfo.value.password),
+                nickname:userInfo.value.nickname,
+                email: userInfo.value.email,
+                birth: userInfo.value.birth
+            }
+            await request.post('/api/users/register',postInfo).then((res:any)=>{
+                status.value = 'LOGIN' 
+                location.reload() 
+            })
+        }
+        async function login() {
+            if(status.value == 'Sign up') {
+                status.value = 'LOGIN'
+                return
+            }
+            await request.post('/api/auth/login',{
+                username: username.value,
+                password: md5(userInfo.value.password)
+            }).then((res:any)=>{
+                const { data, token } = res
+                const store = useUserStore()
+                store.updateInfo(data)
+                Cookies.set('token', token, { expires: 2 })
 
-        function signUp() {
-            console.log(userInfo.value)
-            request.post('/api/users/add',userInfo.value).then((res:any)=>{
-                console.log(res)
+                router.push({name:'Index'})
+            }).catch(e => {
+                console.log(e)
             })
         }
         return {
             status,
+            username,
             userInfo,
             rePassword,
             showRePW,
             legalPW,
             legalEM,
             legalPhone,
-            signUp
+            signUp,
+            login,
+            legalUsername
         }
     }
 })

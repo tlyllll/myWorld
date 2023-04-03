@@ -146,12 +146,13 @@ img {
     color: #fff;
     border-radius: 50%;
     position: absolute;
-    top: 40%;
+    top: 50%;
     z-index: 3;
     text-align: center;
     line-height: 44px;
     opacity: 0;
     transition: all 0.5s;
+    transform: translateY(-50%);
     &:hover {
         opacity: 1;
     }

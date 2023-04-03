@@ -1,5 +1,9 @@
 <template>
     <div class="menu">
+        <div class="user-content" @click="goUser">
+            <span class="iconfont icon-user1"></span>
+            <span class="user-name">{{ userInfo.nickname }}</span>
+        </div>
         <div class="logo-content">#Wod.</div>
         <div class="item-content" :class="{'active': hamAct}">
             <div class="item" 
@@ -16,8 +20,10 @@
 </template>
 
 <script lang="ts">
+import { useUserStore } from '@/store/user';
 import { defineComponent, PropType, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
+import { storeToRefs } from "pinia"
 // import MenuProps from '@/components/PropTypes'
 interface MenuProps {
     name: string,
@@ -31,6 +37,9 @@ export default defineComponent({
     setup (props) {
         let hamAct= ref(false)
         const menuItems = props.menuItems
+        const store = useUserStore()
+        const { userInfo } = storeToRefs(store)
+
         const router = useRouter()
         function active( name:string ) {
             if(name === 'ham') hamAct.value = hamAct.value ? false:true
@@ -39,10 +48,15 @@ export default defineComponent({
                 router.push({name:name})
             }
         }
+        function goUser() {
+            router.push({name:'User'})
+        }
         return {
             menuItems,
             hamAct,
-            active
+            active,
+            userInfo,
+            goUser
         }
     }
 
@@ -77,7 +91,7 @@ export default defineComponent({
     margin-right: 3rem;
 }
 .item {
-    padding: 0 1.5em;
+    padding: 0 1em;
     font-weight: 500;
     display: block;
     position: relative;
@@ -120,6 +134,10 @@ export default defineComponent({
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     background-color: #101010;
+}
+.user-content {
+    width: 261px;
+    font-family: monospace;
 }
 
 @media only screen and (max-width: 768px){
@@ -164,5 +182,12 @@ export default defineComponent({
     .item:hover {
         font-weight: 700;
     }
+    .user-content {
+        width: auto;
+    }
 }
+.iconfont {
+    font-size: 2rem;
+}
+
 </style>
