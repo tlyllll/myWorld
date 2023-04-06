@@ -3,6 +3,8 @@ import { createRouter, createWebHistory, NavigationGuardNext, RouteLocationNorma
 import { useUserStore } from '@/store/user'
 import { checkAuth } from '@/utils/commonApi'
 import Cookies from 'js-cookie'
+import request from '@/utils/api'
+
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/login',
@@ -40,21 +42,17 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
-router.beforeEach((to:RouteLocationNormalized, from, next) => {
+router.beforeEach( (to:RouteLocationNormalized, from, next) => {
     if(to.matched.some(recode => recode.meta.requireAuth)) {
-        // console.log('1-beforeGo: token ====',Cookies.get('token'))
-        const isLogin = checkAuth()
-        console.log('1-beforeGo: isLogin ===', isLogin)
-        if(!isLogin) {
+        request.get('/api/auth/is_login',{}).then((data: any) =>{
+            console.log('isLogin',data)
+            next()
+        }).catch((e: any)=>{
+            console.log('checkAuth',e)
             const store = useUserStore()
             store.initUserInfo()
-            // Cookies.remove('token')
-            next({
-                name: 'Login',
-            })
-        } else {
-            next()
-        }
+            next({name: 'Login'})
+        })
     } else {
         next()
     }

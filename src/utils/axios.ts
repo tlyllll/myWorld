@@ -31,7 +31,6 @@ service.interceptors.response.use(
     async (response: AxiosResponse<any, any>) => {
         // do something
         const { status, statusText, data } = response
-        console.log(response)
         // 根据自定义错误码判断请求是否成功
         if (status === 201 || status === 200) {
           // 将组件用的数据返回
