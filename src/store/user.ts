@@ -1,5 +1,6 @@
 import UserInfo from '@/utils/commonType'
 import { defineStore } from 'pinia'
+import * as moment from 'moment';
 
 
 export const useUserStore = defineStore({
@@ -10,8 +11,20 @@ export const useUserStore = defineStore({
                 nickname: 'Login',
                 phone: '110',
                 email: '',
-                id: -1
+                id: -1,
+                birth: new Date()
             }
+        }
+    },
+    persist: {
+        storage: window.localStorage,
+        beforeRestore: context => {
+            console.log('Before', context.pinia.state.value.user.userInfo)
+        },
+        afterRestore: context => {
+            console.log('After', context)
+            context.pinia.state.value.user.userInfo.birth = new Date(context.pinia.state.value.user.userInfo.birth)
+
         }
     },
     actions: {
@@ -20,6 +33,7 @@ export const useUserStore = defineStore({
             this.userInfo.phone = userinfo.phone
             this.userInfo.email  = userinfo.email
             this.userInfo.id  = userinfo.id
+            this.userInfo.birth = new Date(userinfo.birth)
             console.log(this.userInfo)
         },
         initUserInfo() {
@@ -27,6 +41,7 @@ export const useUserStore = defineStore({
             this.userInfo.phone = '110'
             this.userInfo.email  = ''
             this.userInfo.id = -1
+            this.userInfo.birth = new Date()
         }
     }
 })

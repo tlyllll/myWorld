@@ -65,11 +65,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .menu {
-    border-bottom: 1px solid #E2E8F0;
-    background-color: #fff;
+    // border-bottom: 1px solid #E2E8F0;
+    background-color: #ffffff00;
     position: fixed;
     top: 0;
-    height: 8vh;
+    height: 20px;
     width: 100vw;
     left: 0;
     right: 0;
@@ -83,7 +83,14 @@ export default defineComponent({
     font-family: monospace;
     font-size: 2.1rem;
     font-weight: 800;
-    color: #4d8900;
+    color: #1531a8;
+    border: 2px solid;
+    background-color: #fff;
+    height: 36px;
+    line-height: 36px;
+    width: 150px;
+    text-align: center;
+    border-radius: 5px ;
 }
 .item-content {
     display: flex;
@@ -105,19 +112,19 @@ export default defineComponent({
     position: absolute;
     top: 0;
     left: 100%;
-    border-bottom: 3px solid #000;
+    border-bottom: 3px solid #c2ffd3;
     content: "";
     transition: 0.2s all linear;
 }
 
 .item:hover {
-    color: #3670bd;
+    color: #000;
 }
 .item:hover::before {
     width: 100%;
     left: 0;
     transition-delay: 0.1s;
-    border-bottom-color:#000;
+    border-bottom-color:#c2ffd3;
 }
 .item:hover ~ .item::before {
     left: 0;

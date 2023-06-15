@@ -50,7 +50,6 @@
 <script lang="ts">
 import { computed, defineComponent, ref,inject } from 'vue'
 import request from '@/utils/api'
-import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store/user'
 import router from '@/router'
 import Cookies from 'js-cookie'
@@ -120,7 +119,6 @@ export default defineComponent({
                 const store = useUserStore()
                 store.updateInfo(data)
                 Cookies.set('token', token, { expires: 2 })
-
                 router.push({name:'Index'})
             }).catch(e => {
                 console.log(e)

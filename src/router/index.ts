@@ -44,15 +44,18 @@ const router = createRouter({
 })
 router.beforeEach( (to:RouteLocationNormalized, from, next) => {
     if(to.matched.some(recode => recode.meta.requireAuth)) {
-        request.get('/api/auth/is_login',{}).then((data: any) =>{
-            console.log('isLogin',data)
-            next()
-        }).catch((e: any)=>{
-            console.log('checkAuth',e)
-            const store = useUserStore()
-            store.initUserInfo()
-            next({name: 'Login'})
-        })
+        const store = useUserStore()
+        if(store.$state.userInfo.nickname === 'Login') {next({name: 'Login'})}
+        else {
+            request.get('/api/auth/is_login',{}).then((data: any) =>{
+                console.log('isLogin',data)
+                next()
+            }).catch((e: any)=>{
+                console.log('checkAuth',e)
+                store.initUserInfo()
+                next({name: 'Login'})
+            })
+        }
     } else {
         next()
     }

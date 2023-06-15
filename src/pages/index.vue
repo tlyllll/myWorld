@@ -1,24 +1,65 @@
 <template>
   <div>
-    <Carousel 
-    style="margin-top: 16vh;" 
-    :sliders="imgList"
-    :autoplay="autoplay"
-    :duration="duration"></Carousel>
+    <WebContent>
+      <div class="introduce">
+        <div class="img-content">
+          <svg class="svg-shape">
+            <image href="@/assets/img/favicon.svg" height="100%" width="100%"/>
+          </svg>
+        </div>
+        <div class="text-content">
+          <h1>Hi! It's 1Ting</h1>
+          <h3>Welcome to my world. I'm a front-end developer. This is my personal web page, created to showcase myself and my work.</h3>
+          <h3>Hope you like here. </h3>
+          <h3>Feel free to contact me if you have any questions or would like to discuss potential projects.</h3>
+          <h3>Have a nice day!</h3>
+        </div>
+      </div>
+      <div class="follow-content">
+        <button>Follow me</button>
+        <div class="social-content-colum">
+          <BubbleTop :inner-text="`@Lyt_only`" :width-is="`100`">
+            <svg class="sns-icon">
+              <image href="@/assets/img/icons8-wechat.svg" height="100%" width="100%"/>
+            </svg>
+          </BubbleTop>
+          <BubbleTop :inner-text="`tlyllll`" :width-is="`100`">
+            <svg class="sns-icon">
+              <image href="@/assets/img/icons8-github.svg" height="100%" width="100%"/>
+            </svg>
+          </BubbleTop>
+          <BubbleTop :inner-text="`l1ttt`" :width-is="`100`">
+            <svg class="sns-icon">
+              <image href="@/assets/img/icons8-instagram-old.svg" height="100%" width="100%"/>
+            </svg>
+          </BubbleTop>
+          <BubbleTop :inner-text="`linyiting0401@1633.com`" :width-is="`200`">
+            <svg class="sns-icon">
+              <image href="@/assets/img/icons8-email.svg" height="100%" width="100%"/>
+            </svg>
+          </BubbleTop>
+          
+        </div>
+      </div>
+    </WebContent>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import Carousel from "@/components/carousel.vue";
-
+import WebContent from "@/components/webContent.vue";
+import '@/assets/css/global.css'
+import BubbleTop from "@/components/bubbleTop.vue";
 interface Img {
     imgUrl: string,
     toPath: string
 }
 export default defineComponent({
   components: {
-    Carousel
-  },
+    Carousel,
+    WebContent,
+    BubbleTop
+},
     setup() {
       const baseImgUrl = '/src/assets/img/'
       const imgList: Array<Img> = [
@@ -54,6 +95,52 @@ export default defineComponent({
   })
 </script>
 <style scoped>
+.introduce {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 15px 10px 5px;
+  justify-content: center;
+  align-items: center;
+}
+.img-content {
+  display: flex;
+  flex-direction: column;
 
+}
+.svg-shape {
+  height: 30vw
+}
+.text-content {
+  min-width: 300px;
+  flex: 1;
+  padding: 5px;
+}
+h1 {
+  font-family: fantasy;
+}
+h3 {
+  font-family: monospace;
+}
+.follow-content {
+  position: relative;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.sns-icon {
+  height: 40px;
+  width: 40px;
+  margin: 0 4px;
+}
+.sns-icon:hover {
+  cursor: pointer;
+}
+.bubble-top {
+  position: absolute;
+}
+.social-content-colum {
+  display: flex;
+}
 </style>
   
