@@ -9,7 +9,7 @@
           </svg>
         </div>
         <div class="text-content">
-          <h1>Hi! It's 1Ting</h1>
+          <h1 class="green-bold">Hi! It's 1Ting</h1>
           <h3>Welcome to my world. I'm a front-end developer. This is my personal web page, created to showcase myself and my work.</h3>
           <h3>Hope you like here. </h3>
           <h3>Feel free to contact me if you have any questions or would like to discuss potential projects.</h3>
@@ -48,6 +48,7 @@
         </div>
       </div>
     </WebContent>
+    <ColorCard></ColorCard>
   </div>
 </template>
 <script lang="ts">
@@ -57,7 +58,7 @@ import WebContent from "@/components/webContent.vue";
 import '@/assets/css/global.css'
 import Bubble from "@/components/bubble.vue";
 import SocialMedia from "@/components/socialMedia.vue";
-
+import ColorCard from "@/components/colorCard.vue"
 interface Img {
     imgUrl: string,
     toPath: string
@@ -67,7 +68,8 @@ export default defineComponent({
     Carousel,
     WebContent,
     Bubble,
-    SocialMedia
+    SocialMedia,
+    ColorCard
 },
     setup() {
       const baseImgUrl = '/src/assets/img/'
@@ -153,6 +155,11 @@ h3 {
 }
 .social-content-colum {
   display: flex;
+}
+.green-bold {
+  background-color: #e1f8a1;
+    line-height: 44%;
+    width: 80%;
 }
 </style>
   

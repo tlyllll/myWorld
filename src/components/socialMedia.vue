@@ -59,6 +59,7 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     padding: 0 5px;
+    background-color: #f7f9b1;
 }
 .negative-box {
     border: 4px solid #0f36ae;
