@@ -1,5 +1,6 @@
 <template>
   <div>
+    <SocialMedia></SocialMedia>
     <WebContent>
       <div class="introduce">
         <div class="img-content">
@@ -16,28 +17,33 @@
         </div>
       </div>
       <div class="follow-content">
-        <button>Follow me</button>
+        <button>
+          <svg class="idea">
+              <image href="@/assets/img/icons8-idea.svg" height="100%" width="100%"/>
+            </svg>
+          Follow me
+        </button>
         <div class="social-content-colum">
-          <BubbleTop :inner-text="`@Lyt_only`" :width-is="`100`">
+          <Bubble :inner-text="`@Lyt_only`" :width-is="`100`" :class-name="`bubble-bottom`">
             <svg class="sns-icon">
               <image href="@/assets/img/icons8-wechat.svg" height="100%" width="100%"/>
             </svg>
-          </BubbleTop>
-          <BubbleTop :inner-text="`tlyllll`" :width-is="`100`">
+          </Bubble>
+          <Bubble :inner-text="`tlyllll`" :width-is="`100`" :class-name="`bubble-bottom`">
             <svg class="sns-icon">
               <image href="@/assets/img/icons8-github.svg" height="100%" width="100%"/>
             </svg>
-          </BubbleTop>
-          <BubbleTop :inner-text="`l1ttt`" :width-is="`100`">
+          </Bubble>
+          <Bubble :inner-text="`l1ttt`" :width-is="`100`" :class-name="`bubble-bottom`">
             <svg class="sns-icon">
               <image href="@/assets/img/icons8-instagram-old.svg" height="100%" width="100%"/>
             </svg>
-          </BubbleTop>
-          <BubbleTop :inner-text="`linyiting0401@1633.com`" :width-is="`200`">
+          </Bubble>
+          <Bubble :inner-text="`linyiting0401@163.com`" :width-is="`200`" :class-name="`bubble-bottom`">
             <svg class="sns-icon">
               <image href="@/assets/img/icons8-email.svg" height="100%" width="100%"/>
             </svg>
-          </BubbleTop>
+          </Bubble>
           
         </div>
       </div>
@@ -49,7 +55,9 @@ import { defineComponent } from "vue";
 import Carousel from "@/components/carousel.vue";
 import WebContent from "@/components/webContent.vue";
 import '@/assets/css/global.css'
-import BubbleTop from "@/components/bubbleTop.vue";
+import Bubble from "@/components/bubble.vue";
+import SocialMedia from "@/components/socialMedia.vue";
+
 interface Img {
     imgUrl: string,
     toPath: string
@@ -58,7 +66,8 @@ export default defineComponent({
   components: {
     Carousel,
     WebContent,
-    BubbleTop
+    Bubble,
+    SocialMedia
 },
     setup() {
       const baseImgUrl = '/src/assets/img/'
@@ -102,6 +111,7 @@ export default defineComponent({
   padding: 15px 10px 5px;
   justify-content: center;
   align-items: center;
+  background-color: #ffffff;
 }
 .img-content {
   display: flex;
@@ -115,6 +125,7 @@ export default defineComponent({
   min-width: 300px;
   flex: 1;
   padding: 5px;
+  
 }
 h1 {
   font-family: fantasy;
@@ -127,6 +138,7 @@ h3 {
   padding: 10px;
   display: flex;
   justify-content: space-between;
+  background-color: #ffffff;
 }
 .sns-icon {
   height: 40px;

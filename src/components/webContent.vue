@@ -41,4 +41,14 @@ export default defineComponent({
     display: inline-block;
     margin: auto 3px;
 }
+.web-content::after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    border: 4px solid #0f36ae;
+    transform: translate(-15px, 8px);
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
 </style>

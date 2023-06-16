@@ -1,9 +1,9 @@
 <template>
     <div class="menu">
-        <div class="user-content" @click="goUser">
+        <!-- <div class="user-content" @click="goUser">
             <span class="iconfont icon-user1"></span>
             <span class="user-name">{{ userInfo.nickname }}</span>
-        </div>
+        </div> -->
         <div class="logo-content">#Wod.</div>
         <div class="item-content" :class="{'active': hamAct}">
             <div class="item" 
@@ -79,6 +79,19 @@ export default defineComponent({
     padding: 1rem 1.5rem;
     z-index: 100;
 }
+.menu::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(254 211 255 / 50%);
+    backdrop-filter: blur(10px);
+    opacity: 0.9;
+    z-index: 0;
+}
 .logo-content {
     font-family: monospace;
     font-size: 2.1rem;
@@ -88,9 +101,13 @@ export default defineComponent({
     background-color: #fff;
     height: 36px;
     line-height: 36px;
-    width: 150px;
+    width: 200px;
     text-align: center;
     border-radius: 5px ;
+    z-index: 1;
+    position: relative;
+    left: 50vw;
+    transform: translate(-124px);
 }
 .item-content {
     display: flex;
@@ -112,7 +129,7 @@ export default defineComponent({
     position: absolute;
     top: 0;
     left: 100%;
-    border-bottom: 3px solid #c2ffd3;
+    border-bottom: 3px solid #0f36ae;
     content: "";
     transition: 0.2s all linear;
 }
@@ -124,7 +141,7 @@ export default defineComponent({
     width: 100%;
     left: 0;
     transition-delay: 0.1s;
-    border-bottom-color:#c2ffd3;
+    border-bottom-color:#0f36ae;
 }
 .item:hover ~ .item::before {
     left: 0;
@@ -141,6 +158,7 @@ export default defineComponent({
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     background-color: #101010;
+    
 }
 .user-content {
     width: 261px;
@@ -156,8 +174,10 @@ export default defineComponent({
         text-align: center;
         top: 8vh;
         transition: 0.3s;
-        background-color: #fff;
-        box-shadow:0 10px 27px rgba(0, 0, 0, 0.05);
+        // background-color: #fff;
+        background-color: rgb(254 211 255 / 50%);
+        backdrop-filter: blur(10px);
+        // box-shadow:0 10px 27px rgba(0, 0, 0, 0.05);
         border-radius: 10px;
     }
     .item-content.active {
@@ -170,6 +190,7 @@ export default defineComponent({
         display: block;
         cursor: pointer;
         margin-right: 50px;
+        z-index: 1;
     }
 
     .hamburger.active .bar:nth-child(2) {
@@ -188,6 +209,7 @@ export default defineComponent({
     }
     .item:hover {
         font-weight: 700;
+        background-color: #ffffff6a;
     }
     .user-content {
         width: auto;

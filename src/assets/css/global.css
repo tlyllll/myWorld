@@ -8,3 +8,9 @@
 
   transform: rotate(315deg);
 }
+.idea {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  transform: translate(-20px,4px);
+}
