@@ -50,9 +50,10 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  box-shadow: #2aa2f1 -2px -2px 2px 1px inset, #ffffffb5 4px 3px 2px 0px inset;
 }
 button:hover {
-  border-color: #646cff;
+  box-shadow: #afa1fc 2px 3px 2px 1px inset, #ffffffb5 -4px -5px 2px 0px inset;
 }
 button:focus,
 button:focus-visible {
@@ -110,7 +111,7 @@ button::after {
 button:hover {
   background-color: #fed3ff;
   border: 3px solid #0f36ae;
-  color: #fff;
+
   /* cursor: pointer; */
 }
 button:hover::after {
