@@ -95,7 +95,12 @@
             </div>
         </WebContent>
         <div class="block">
-            <SmallWebContent></SmallWebContent>
+            <SmallWebContent
+                :title="`My story`"
+                :img-path="`src/assets/img/icons8-girl-64.png`"
+            >
+            <span>About me: About my Background</span>
+            </SmallWebContent>
             <SmallWebContent></SmallWebContent>
             <SmallWebContent></SmallWebContent>
             <SmallWebContent></SmallWebContent>
@@ -121,14 +126,14 @@ interface Img {
 }
 export default defineComponent({
     components: {
-    Carousel,
-    WebContent,
-    Bubble,
-    SocialMedia,
-    ColorCard,
-    Footer,
-    SmallWebContent
-},
+        Carousel,
+        WebContent,
+        Bubble,
+        SocialMedia,
+        ColorCard,
+        Footer,
+        SmallWebContent,
+    },
     setup() {
         const baseImgUrl = '/src/assets/img/';
         const imgList: Array<Img> = [

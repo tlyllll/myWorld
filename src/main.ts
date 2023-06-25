@@ -5,6 +5,7 @@ import store from './store'
 import router from '@/router'
 import '@/assets/icon/iconfont.css'
 import Cookies from 'js-cookie'
+import '@/assets/css/fonts.css'
 const app = createApp(App)
 
 app.use(store)
